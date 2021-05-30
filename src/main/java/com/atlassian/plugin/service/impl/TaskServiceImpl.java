@@ -70,11 +70,11 @@ public class TaskServiceImpl implements TaskService {
 //    }
 
     @Override
-    public List<TaskModel> getAllTasks() throws SearchException {
+    public List<TaskModel> getAllTasks(long projectId) throws SearchException {
 
         List<TaskModel> taskModels = new ArrayList<>();
         ApplicationUser user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser();
-        Project project = ComponentAccessor.getProjectManager().getProjectObj(10000L);
+        Project project = ComponentAccessor.getProjectManager().getProjectObj(projectId);
 //        Query query = JqlQueryBuilder.newBuilder()
 //                .where()
 //                .project().eq().string(project.getKey())

@@ -1,18 +1,26 @@
-// $(() => getAllTasks(id))
+const uri = new URL(window.location.href)
+const projectId = uri.searchParams.get("projectId")
 
-function getAllTasks() {
-    AJS.$.ajax({
-        type: "GET",
-        // data: {"id": projectId},
-        url: "/jira/rest/gantt/1.0/task/getAllTasks",
-        dataType: "json",
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log(errorThrown)
-        },
-        success: function (data) {
-            fillTableForTasks(data)
-        }
-    })
+ $(() => getAllTasks(projectId))
+
+
+function getAllTasks(projectId) {
+    jQuery.ajax({
+                    type: "GET",
+                    data: { "projectId": projectId },
+                    url: "/jira/rest/gantt/1.0/task/getAllTasks",
+                    dataType: "json",
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(errorThrown)
+                    },
+                    success: function (data) {
+                        fillTableForTasks(data)
+                    }
+                })
+}
+
+function buildGant() {
+    window.location.href="http://localhost:2990/jira/secure/newGanttPlugin2!default.jspa?projectId=" + projectId
 }
 
 function fillTableForTasks(tasks) {
