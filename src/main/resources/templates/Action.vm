@@ -1,0 +1,27 @@
+#* @vtlvariable name="action" type="com.atlassian.plugin.action.MainAction" *#
+
+##$webResourceManager.requireResource("com.atlassian.plugin.newGanttPlugin:newGanttPlugin-resources")
+$webResourceManager.requireResource("com.atlassian.plugin.gantt:newGanttPlugin-resources")
+$webResourceManager.requireResource("com.atlassian.auiplugin:aui-page-header")
+$webResourceManager.requireResource("com.atlassian.auiplugin:aui-sidebar")
+$webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-iconfont")
+#set($baseurl = $settingsManager.getGlobalSettings().getBaseUrl())
+#set($name = $action.getName())
+
+#if($action.hasAccess())
+    <section id="content" role="main">
+        #parse("/templates/Sidebar.vm")
+            <div class="aui-page-panel">
+                <div class="aui-page-panel-inner">
+                    <section class="aui-page-panel-content">
+                        <div class="text-main-page">
+                            <div id="mainpage"></div>
+                                <h2>Добро пожаловать!</h2>
+                        </div>
+                    </section>
+                </div>
+            </div>
+    </section>
+#else
+    <p>Авторизуйтесь, чтобы получить доступ к плагину</p>
+#end
