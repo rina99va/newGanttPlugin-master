@@ -1,10 +1,26 @@
-$(() => makeRequest())
+var loadedData
 
-function makeRequest() {
+$(() => {
+        const uri = new URL(window.location.href)
+        const projectId = uri.searchParams.get("projectId")
+
+        makeRequest(projectId)
+    }
+)
+
+function reverse() {
+    console.log(loadedData)
+    loadedData.tasks.reverse()
+    loadedData.resourceAssignments.reverse()
+    drawGant(loadedData)
+}
+
+function makeRequest(projectId) {
     jQuery.ajax(
         {
             dataType: "json",
             type: 'get',
+            data: { "projectId": projectId },
             url: AJS.contextPath() + '/rest/gantt/1.0/task/getAllTasks',
             async:false
         }
@@ -12,6 +28,13 @@ function makeRequest() {
 
         const allData = getDataNormal(data, -1)
 
+        loadedData = allData
+
+        drawGant(allData)
+    });
+}
+
+function drawGant(allData) {
         const gantt = $("#gantt").dxGantt({
             taskTitlePosition: "outside",
             taskStatusPosition: "outside",
@@ -111,18 +134,6 @@ function makeRequest() {
             }
         });
 
-        // $("#gantt").dxDataGrid({
-        //     dataSource: allData.tasks,
-        //     columnsAutoWidth: true,
-        //     showBorders: true,
-        //     // focusedRowEnabled: true,
-        //     // focusedRowKey: 1,
-        //     filterRow: {
-        //         visible: true,
-        //         applyFilter: "auto"
-        //     }
-        // }).dxGantt("instance");
-
         function getTaskTooltipContentTemplate(task, container) {
             var timeEstimate = Math.abs(task.start - task.end) / 36e5;
             var timeLeft = Math.floor((100 - task.progress) / 100 * timeEstimate);
@@ -148,8 +159,7 @@ function makeRequest() {
 
 
         $(document.querySelectorAll('.dx-treelist-text-content').forEach(function(item){$(item).html($(item).text())}))
-    });
-}
+        }
 
 /**
  author: "admin"
@@ -178,6 +188,7 @@ function getDataNormal(jsonArray, parentId) {
         afterWeek.setDate(now + 7)
 
         const safeDate = ((s) => {
+            if (!s) return undefined
             try {
                 return new Date(s)
             } catch (e) {
@@ -185,15 +196,21 @@ function getDataNormal(jsonArray, parentId) {
             }
         })
 
-        const start = safeDate(item.start)
-        const end = safeDate(item.end)
+        var start = safeDate(item.start)
+        var end = safeDate(item.end)
         if (!start && end) {
+            start = new Date()
             start.setTime(end.getTime() - 7)
         } else if (start && !end) {
-            end.setDate(start.getTime() + 7)
+            end = new Date()
+            end.setDate(start.getDate() + 7)
         } else if (!start && !end) {
-            continue
+            start = new Date()
+            end = new Date()
+            end.setDate(start.getTime() + 7)
         }
+
+        console.log(start + " " + end)
 
         tasks.push(
             {

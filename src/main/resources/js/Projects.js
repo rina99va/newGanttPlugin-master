@@ -65,9 +65,11 @@ function fillTableForProjects(projects) {
                 buttons: [{
                     text: "Перейти к списку задач",
                     onClick: function (e) {
+
                         var projectId = e.row.data.id
+
                         // $(() => getAllTasksFromJira(projectId))
-                        window.location.href = '/jira/secure/newGanttPlugin3!default.jspa'; //id=' + bookId;
+                        window.location.href = '/jira/secure/newGanttPlugin3!default.jspa?projectId=' + projectId; //id=' + bookId;
                         // $(() => getAllTasks(projectId))
                         // $(() => makeRequest())
                         // function getAllTasks(projectId) {

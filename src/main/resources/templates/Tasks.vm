@@ -20,10 +20,6 @@ $webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-ic
 <!-- DevExtreme library -->
 <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/20.2.7/js/dx.all.js"></script>
 
-<script>
-    getAllTasks()
-</script>
-
 ##<header class="page-header">
 ##    <div class="header-logo">
 ##        <h1>БИБЛИОТЕКА</h1>
@@ -42,7 +38,7 @@ $webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-ic
                 <div class="dx-viewport demo-container">
                     <div id="gridContainer-tasks"></div>
                     <div>
-                        <button class="aui-button aui-button-primary" onclick="window.location.href='http://localhost:2990/jira/secure/newGanttPlugin2!default.jspa';">Построить диаграмму Ганта</button>
+                        <button class="aui-button aui-button-primary" onclick="buildGant()">Построить диаграмму Ганта</button>
                         <div id="gridContainer-tasks"></div>
                     </div>
 ##                    <div class="option">

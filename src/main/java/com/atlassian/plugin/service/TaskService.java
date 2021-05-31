@@ -12,7 +12,7 @@ public interface TaskService {
     //SearchResults<Issue> getAllTasks() throws SearchException;
 
 //    List<TaskModel> getAllTasks(/*Long projectId*/) throws SearchException;
-    List<TaskModel> getAllTasks() throws SearchException;
+    List<TaskModel> getAllTasks(long projectId) throws SearchException;
 
     TaskModel getTaskById(int id);
 

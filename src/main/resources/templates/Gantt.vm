@@ -110,6 +110,10 @@
         <div id="downloadPdf" onclick="downloadPDF()">Download diagram</div>
     </div>
 
+    <div class="aui-button">
+            <div id="reverse" onclick="reverse()">Reverse</div>
+        </div>
+
 ##    <div class="aui-button">
 ##        <div id="downloadCsv" onclick="downloadCSV()">CSV</div>
 ##    </div>

@@ -33,8 +33,9 @@ public class TaskRest {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getAllTasks")
-    public List<TaskModel> getAllTasks() throws SearchException {
-        return taskService.getAllTasks();
+    public List<TaskModel> getAllTasks(@QueryParam("projectId") long projectId) throws SearchException {
+//        return Response.ok(taskService.getAllTasks(projectId)).build();
+        return taskService.getAllTasks(projectId);
     }
 //    public Response getAllTasks(@QueryParam("id") Long id) throws SearchException {
 ////        return taskService.getAllTasks(id);
