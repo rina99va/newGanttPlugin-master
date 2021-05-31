@@ -38,7 +38,7 @@ $webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-ic
                 <div class="dx-viewport demo-container">
                     <div id="gridContainer-tasks"></div>
                     <div>
-                        <button class="aui-button aui-button-primary" onclick="buildGant()">Построить диаграмму Ганта</button>
+                        <button class="aui-button aui-button-primary" onclick="buildGantt()">Построить диаграмму Ганта</button>
                         <div id="gridContainer-tasks"></div>
                     </div>
 ##                    <div class="option">

@@ -68,36 +68,7 @@ function fillTableForProjects(projects) {
 
                         var projectId = e.row.data.id
 
-                        // $(() => getAllTasksFromJira(projectId))
                         window.location.href = '/jira/secure/newGanttPlugin3!default.jspa?projectId=' + projectId; //id=' + bookId;
-                        // $(() => getAllTasks(projectId))
-                        // $(() => makeRequest())
-                        // function getAllTasks(projectId) {
-                        //     AJS.$.ajax({
-                        //         type: "GET",
-                        //         url: "/jira/rest/gantt/1.0/task/getAllTasks",
-                        //         dataType: "json",
-                        //         error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        //             console.log(errorThrown)
-                        //         },
-                        //         success: function (data) {
-                        //             fillTableForTasks(data)
-                        //         }
-                        //     })
-                        // }
-                        // function getAllTasks(projectId) {
-                        //     AJS.$.ajax({
-                        //         type: "GET",
-                        //         url: "/jira/rest/gantt/1.0/task/getAllTasks",
-                        //         dataType: "json",
-                        //         error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        //             console.log(errorThrown)
-                        //         },
-                        //         success: function (data) {
-                        //             fillTableForTasks(data)
-                        //         }
-                        //     })
-                        // }
                     }
                 }]
             }

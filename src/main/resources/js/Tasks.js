@@ -19,7 +19,7 @@ function getAllTasks(projectId) {
                 })
 }
 
-function buildGant() {
+function buildGantt() {
     window.location.href="http://localhost:2990/jira/secure/newGanttPlugin2!default.jspa?projectId=" + projectId
 }
 

@@ -8,6 +8,10 @@ $(() => {
     }
 )
 
+function goToTaskPage() {
+    window.location.href="http://localhost:2990/jira/secure/newGanttPlugin3!default.jspa?projectId=" + projectId
+}
+
 function reverse() {
     console.log(loadedData)
     loadedData.tasks.reverse()
