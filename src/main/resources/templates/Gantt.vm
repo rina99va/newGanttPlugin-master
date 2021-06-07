@@ -106,29 +106,44 @@
         <div id="downloadPdf" onclick="downloadPDF()">Download diagram</div>
     </div>
 
+    <button class="aui-button aui-dropdown2-trigger" aria-controls="sortBy">
+        Sort by
+    </button>
+    <aui-dropdown-menu id="sortBy">
+        <aui-section label="Сортировать">
+            <aui-item-radio onclick="reverse()" interactive checked>По возрастанию id</aui-item-radio>
+            <aui-item-radio onclick="sort()" interactive>По убыванию id</aui-item-radio>
+        </aui-section>
+    </aui-dropdown-menu>
+
+##    <button class="aui-button aui-dropdown2-trigger" aria-controls="groupBy">
+##        Group by
+##    </button>
+##    <aui-dropdown-menu id="groupBy">
+##        <aui-item-radio onclick="byAuthor()" interactive>По создателю</aui-item-radio>
+##    </aui-dropdown-menu>
+
     <div class="aui-button">
-            <div id="reverse" onclick="reverse()">Reverse</div>
-        </div>
-
-##    <div class="aui-button">
-##        <div id="downloadCsv" onclick="downloadCSV()">CSV</div>
-##    </div>
-    ####################################################
-##    <a href="#" id="downloadPdf">Download Report Page as PDF</a>
-##    <br/><br/>
-##    <div id="gantt">
-##      <div id="gantt" style="width: 100%;float: left;">
-##        <canvas id="gantt"></canvas>
-##      </div>
-    #####################
-##    <div id="gantt"></div>
-
-    <div id="gantt">
-##        <canvas width="800" height="600"></canvas>
+        <div id="addTask" onclick="addTask()">Add task</div>
     </div>
+
+    <div id="gantt"></div>
 
     <div id="ganttToPDF"></div>
 </div>
-
 </body>
 </html>
+
+<script>
+    var section = document.querySelector('aui-section#сортировать');
+    section.addEventListener('change', function (e) {
+        var tagName = e.target.tagName.toLowerCase();
+        if (tagName === 'aui-item-radio') {
+            if (e.target.hasAttribute('checked')) {
+                console.log(e.target.textContent, 'was selected.');
+            } else {
+                console.log(e.target.textContent, 'was deselected.');
+            }
+        }
+    });
+</script>

@@ -57,12 +57,13 @@ function fillTableForTasks(tasks) {
             },{
                 caption: "Статус задачи",
                 dataField: "status",
-                width: 80,
+                width: 200,
                 allowHeaderFiltering: true,
                 allowSearch: false
             }, {
                 caption: "Название задачи",
                 dataField: "title",
+                width: 200,
                 allowHeaderFiltering: false,
                 headerFilter: {
                     allowSearch: true
@@ -84,7 +85,14 @@ function fillTableForTasks(tasks) {
             }, {
                 caption: "Автор",
                 dataField: "author",
-                width: 200,
+                width: 80,
+                headerFilter: {
+                    allowSearch: false
+                }
+            }, {
+                caption: "Связанные задачи",
+                dataField: "issueLinks",
+                width: 80,
                 headerFilter: {
                     allowSearch: false
                 }

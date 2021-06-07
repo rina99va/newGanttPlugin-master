@@ -1,6 +1,8 @@
 package com.atlassian.plugin.model;
 
+import com.atlassian.jira.issue.link.IssueLink;
 import com.atlassian.jira.rest.client.api.domain.IssueField;
+//import com.atlassian.jira.rest.client.api.domain.IssueLink;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,6 +10,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.List;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -30,7 +34,7 @@ public class TaskModel {
     @XmlElement
     private String progress;
     @XmlElement
-    private String issueLink;
+    private Collection<IssueLink> issueLinks;
 
 
     public TaskModel() {}
@@ -87,8 +91,8 @@ public class TaskModel {
         return progress;
     }
 
-    public String getIssueLink() {
-        return issueLink;
+    public Collection<IssueLink> getIssueLinks() {
+        return issueLinks;
     }
 
     public void setId(Long id) {
@@ -123,7 +127,7 @@ public class TaskModel {
         this.progress = progress;
     }
 
-    public void setIssueLink(String issueLink) {
-        this.issueLink = issueLink;
+    public void setIssueLinks(Collection<IssueLink> issueLinks) {
+        this.issueLinks = issueLinks;
     }
 }

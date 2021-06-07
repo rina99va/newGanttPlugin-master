@@ -13,11 +13,41 @@ function goToTaskPage() {
 }
 
 function reverse() {
-    console.log(loadedData)
-    loadedData.tasks.reverse()
-    loadedData.resourceAssignments.reverse()
-    drawGant(loadedData)
+    // console.log(loadedData)
+    // loadedData.tasks.reverse()
+    // loadedData.resourceAssignments.reverse()
+    // drawGantt(loadedData)
+    loadedData.tasks.sort(function (a, b) {
+        return a.id - b.id
+    })
+
+    loadedData.resourceAssignments.sort(function (a, b) {
+        return a.id - b.id
+    })
+
+    drawGantt(loadedData)
 }
+
+function sort() {
+    loadedData.tasks.sort(function (a, b) {
+         return b.id - a.id
+    })
+    loadedData.resourceAssignments.sort(function (a, b) {
+        return b.id - a.id
+    })
+    drawGantt(loadedData)
+}
+
+// function byAuthor() {
+//     loadedData.tasks.sort(function (a, b) {
+//         var authorA = a.author.toLowerCase();
+//         var authorB = b.author.toLowerCase();
+//
+//         if (authorA < authorB) return -1;
+//         if (authorB < authorA) return 1;
+//         return 0
+//     })
+// }
 
 function makeRequest(projectId) {
     jQuery.ajax(
@@ -34,11 +64,11 @@ function makeRequest(projectId) {
 
         loadedData = allData
 
-        drawGant(allData)
+        drawGantt(allData)
     });
 }
 
-function drawGant(allData) {
+function drawGantt(allData) {
         const gantt = $("#gantt").dxGantt({
             taskTitlePosition: "outside",
             taskStatusPosition: "outside",
@@ -71,11 +101,21 @@ function drawGant(allData) {
                 "collapseAll",
                 "expandAll",
                 "separator",
-                "separator",
                 "zoomIn",
-                "zoomOut"
+                "zoomOut",
+                    // {
+                    //     widget: "dxButton",
+                    //     options: {
+                    //         text: "addTask",
+                    //         icon: "add new task",
+                    //         stylingMode: "text",
+                    //         onClick: function () {
+                    //             popupInstance.show();
+                    //         }
+                    // }
             ]
             },
+
             columns: [{
                 dataField: "title",
                 caption: "Название",
@@ -90,7 +130,6 @@ function drawGant(allData) {
             taskListWidth: 600,
             taskTooltipContentTemplate: getTaskTooltipContentTemplate
         }).dxGantt("instance");
-
 
         $("#scaleType").dxSelectBox({
             items: [
@@ -286,6 +325,35 @@ var dependencies = [{
     "type": 0
 }]
 
+function addTask() {
+    jQuery.ajax(
+        {
+            dataType: "json",
+            url: `http://localhost:8080/rest/api/2/issue/createmeta`,
+            type: 'post',
+            // data: {"projectId": projectId},
+            responseType: 'json',
+            headers: {
+                // Authorization: authorization,
+                'Content-Type': 'application/json'
+            },
+            json: {
+                update: {},
+                fields: {
+                    project:
+                        {
+                            "id": projectId
+                        },
+                    summary: "New Task",
+                    description: "Creating of an issue using IDs for projects and issue types using the REST API",
+                    issuetype: {
+                        "id": projectId
+                    }
+                }
+            }
+        })
+}
+
 
 // var statuses = [
 //     {
@@ -308,9 +376,6 @@ var dependencies = [{
 //         'text': 'admin'
 //     }
 // ]
-// function sortById() {
-//
-// }
 
 function downloadPDF() {
     const { jsPDF } = window.jspdf;
@@ -333,41 +398,6 @@ function downloadPDF() {
         }
     });
 }
-
-// function downloadCSV(csv, filename) {
-//     var csvFile;
-//     var downloadLink;
-//
-//     csvFile = new Blob([csv], {type:"text/csv"});
-//     downloadLink = document.createElement("a");
-//     downloadLink.download = filename;
-//     downloadLink.href = window.URL.createObjectURL(csvFile);
-//     downloadLink.style.display = "none";
-//
-//     document.body.appendChild(downloadLink);
-//
-//     downloadLink.click();
-// }
-//
-// function getTasks() {
-//     jQuery.ajax(
-//         {
-//             dataType: "json",
-//             type: 'get',
-//             url: AJS.contextPath() + '/rest/gantt/1.0/task/getAllTasks',
-//             async: false
-//         }
-//     )
-// }
-//
-// function exportDataToCSV(filename) {
-//     var csv = [];
-//     var rows = document.querySelectorAll();
-//
-//     for (var i = 0; i < rows.length; i++) {
-//         var row = [], cols = rows[i].querySelectorAll
-//     }
-// }
 
 
 
