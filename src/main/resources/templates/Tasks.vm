@@ -20,13 +20,7 @@ $webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-ic
 <!-- DevExtreme library -->
 <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/20.2.7/js/dx.all.js"></script>
 
-##<header class="page-header">
-##    <div class="header-logo">
-##        <h1>БИБЛИОТЕКА</h1>
-##    </div>
-##    <hr>
-##</header>
-
+#if($action.hasAccess())
 <section id="content" role="main">
     <!-- AUI Sidebar -->
     #parse("/templates/Sidebar.vm")
@@ -41,11 +35,12 @@ $webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-ic
                         <button class="aui-button aui-button-primary" onclick="buildGantt()">Построить диаграмму Ганта</button>
                         <div id="gridContainer-tasks"></div>
                     </div>
-##                    <div class="option">
-##                        <div id="notShowAttributes"></div>
-##                    </div>
                 </div>
             </section>
         </div>
     </div>
 </section>
+
+#else
+<p>Авторизуйтесь, чтобы получить доступ к плагину</p>
+#end

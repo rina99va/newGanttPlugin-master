@@ -1,6 +1,5 @@
 #* @vtlvariable name="action" type="com.atlassian.plugin.action.MainAction" *#
 
-##$webResourceManager.requireResource("com.atlassian.plugin.newGanttPlugin:newGanttPlugin-resources")
 $webResourceManager.requireResource("com.atlassian.plugin.gantt:newGanttPlugin-resources")
 $webResourceManager.requireResource("com.atlassian.auiplugin:aui-page-header")
 $webResourceManager.requireResource("com.atlassian.auiplugin:aui-sidebar")

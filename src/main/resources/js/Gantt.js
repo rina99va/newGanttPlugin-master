@@ -13,18 +13,12 @@ function goToTaskPage() {
 }
 
 function reverse() {
-    // console.log(loadedData)
-    // loadedData.tasks.reverse()
-    // loadedData.resourceAssignments.reverse()
-    // drawGantt(loadedData)
     loadedData.tasks.sort(function (a, b) {
         return a.id - b.id
     })
-
     loadedData.resourceAssignments.sort(function (a, b) {
         return a.id - b.id
     })
-
     drawGantt(loadedData)
 }
 
@@ -47,6 +41,7 @@ function sort() {
 //         if (authorB < authorA) return 1;
 //         return 0
 //     })
+//     drawGantt(loadedData)
 // }
 
 function makeRequest(projectId) {
@@ -103,16 +98,6 @@ function drawGantt(allData) {
                 "separator",
                 "zoomIn",
                 "zoomOut",
-                    // {
-                    //     widget: "dxButton",
-                    //     options: {
-                    //         text: "addTask",
-                    //         icon: "add new task",
-                    //         stylingMode: "text",
-                    //         onClick: function () {
-                    //             popupInstance.show();
-                    //         }
-                    // }
             ]
             },
 
@@ -203,15 +188,6 @@ function drawGantt(allData) {
 
         $(document.querySelectorAll('.dx-treelist-text-content').forEach(function(item){$(item).html($(item).text())}))
         }
-
-/**
- author: "admin"
- end: "2021-05-24 00:00:00.0"
- id: 10000
- start: "2021-05-23 15:06:56.0"
- status: "In Progress"
- title: "Запустить эту хрень"
- */
 
 function getDataNormal(jsonArray, parentId) {
     const tasks = []
@@ -308,74 +284,51 @@ var resources = [
         'text': 'admin'
     }]
 
-var dependencies = [{
-    "id": 1,
-    "predecessorId": 3,
-    "successorId": 4,
-    "type": 0
-}, {
-    "id": 2,
-    "predecessorId": 4,
-    "successorId": 5,
-    "type": 0
-}, {
-    "id": 3,
-    "predecessorId": 5,
-    "successorId": 6,
-    "type": 0
-}]
+// var dependencies = [{
+//     "id": 1,
+//     "predecessorId": 3,
+//     "successorId": 4,
+//     "type": 0
+// }, {
+//     "id": 2,
+//     "predecessorId": 4,
+//     "successorId": 5,
+//     "type": 0
+// }, {
+//     "id": 3,
+//     "predecessorId": 5,
+//     "successorId": 6,
+//     "type": 0
+// }]
 
-function addTask() {
-    jQuery.ajax(
-        {
-            dataType: "json",
-            url: `http://localhost:8080/rest/api/2/issue/createmeta`,
-            type: 'post',
-            // data: {"projectId": projectId},
-            responseType: 'json',
-            headers: {
-                // Authorization: authorization,
-                'Content-Type': 'application/json'
-            },
-            json: {
-                update: {},
-                fields: {
-                    project:
-                        {
-                            "id": projectId
-                        },
-                    summary: "New Task",
-                    description: "Creating of an issue using IDs for projects and issue types using the REST API",
-                    issuetype: {
-                        "id": projectId
-                    }
-                }
-            }
-        })
-}
-
-
-// var statuses = [
-//     {
-//         'id': 1,
-//         'text': 'New'
-//     }, {
-//         'id': 2,
-//         'text': 'Completed'
-//     }, {
-//         'id': 3,
-//         'text': 'In Progress'
-//     }, {
-//         'id': 4,
-//         'text': ''
-//     }]
-//
-// var authors = [
-//     {
-//         'id': 1,
-//         'text': 'admin'
-//     }
-// ]
+// function addTask() {
+//     jQuery.ajax(
+//         {
+//             dataType: "json",
+//             url: `http://localhost:8080/rest/api/2/issue/createmeta`,
+//             type: 'post',
+//             // data: {"projectId": projectId},
+//             responseType: 'json',
+//             headers: {
+//                 // Authorization: authorization,
+//                 'Content-Type': 'application/json'
+//             },
+//             json: {
+//                 update: {},
+//                 fields: {
+//                     project:
+//                         {
+//                             "id": projectId
+//                         },
+//                     summary: "New Task",
+//                     description: "Creating of an issue using IDs for projects and issue types using the REST API",
+//                     issuetype: {
+//                         "id": projectId
+//                     }
+//                 }
+//             }
+//         })
+// }
 
 function downloadPDF() {
     const { jsPDF } = window.jspdf;

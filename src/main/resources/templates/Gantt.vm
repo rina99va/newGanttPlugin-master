@@ -42,28 +42,10 @@
     <!-- FileSaver library -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.js"></script>
+
+#if($action.hasAccess())
 </head>
 <body class="dx-viewport">
-##<section id="content" role="main">
-##    <!-- AUI Sidebar -->
-##    ##    #parse("/templates/Sidebar.vm")
-##</section>
-##<div class="dx-viewport demo-container">
-##    <div class="options">
-##        <div class="caption">Options</div>
-##        <div class="option">
-##            <div id="preventContextMenuShowing"></div>
-##        </div>
-##        <div class="option">
-##            <div id="customizeContextMenu"></div>
-##        </div>
-##    </div>
-##    <div id="gantt"></div>
-##    <div>
-##        <button onclick="window.location.href='http://localhost:2990/jira/secure/newGanttPlugin1!default.jspa';">Вернуться к списку проектов</button>
-##        <div id="gantt"></div>
-##    </div>
-##</div>
 
 <div class="dx-viewport demo-container">
     <div class="options">
@@ -76,31 +58,16 @@
             <div>Title Position</div>
             <div id="titlePosition"></div>
         </div>
-##        <div class="option">
-##            <div>Status Position</div>
-##            <div id="statusPosition"></div>
-##        </div>
-##        <div class="option">
-##            <div>Author Position</div>
-##            <div id="authorPosition"></div>
-##        </div>
         <div class="option">
             <div id="showResources"></div>
         </div>
-##        <div class="option">
-##            <div id="showResources2"></div>
-##        </div>
         <div class="option">
             <div id="customizeTaskTooltip"></div>
         </div>
-##        <div class="option">
-##            <div id="sortById">Отсортировать по ID</div>
-##        </div>
     </div>
     <div class="aui-button">
         <div onclick="goToTaskPage()">Вернуться к списку задач</div>
     </div>
-
 
     <div class="aui-button">
         <div id="downloadPdf" onclick="downloadPDF()">Download diagram</div>
@@ -120,12 +87,14 @@
 ##        Group by
 ##    </button>
 ##    <aui-dropdown-menu id="groupBy">
-##        <aui-item-radio onclick="byAuthor()" interactive>По создателю</aui-item-radio>
+##        <aui-section label="Группировать">
+##            <aui-item-radio onclick="byAuthor()" interactive>По создателю</aui-item-radio>
+##        </aui-section>
 ##    </aui-dropdown-menu>
 
-    <div class="aui-button">
-        <div id="addTask" onclick="addTask()">Add task</div>
-    </div>
+##    <div class="aui-button">
+##        <div id="addTask" onclick="addTask()">Add task</div>
+##    </div>
 
     <div id="gantt"></div>
 
@@ -147,3 +116,21 @@
         }
     });
 </script>
+
+##<script>
+##    var section = document.querySelector('aui-section#группировать');
+##    section.addEventListener('change', function (e) {
+##        var tagName = e.target.tagName.toLowerCase();
+##        if (tagName === 'aui-item-radio') {
+##            if (e.target.hasAttribute('checked')) {
+##                console.log(e.target.textContent, 'was selected.');
+##            } else {
+##                console.log(e.target.textContent, 'was deselected.');
+##            }
+##        }
+##    });
+##</script>
+
+#else
+<p>Авторизуйтесь, чтобы получить доступ к плагину</p>
+#end

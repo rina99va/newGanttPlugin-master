@@ -28,8 +28,6 @@ function fillTableForTasks(tasks) {
         dataSource: tasks,
         columnsAutoWidth: true,
         showBorders: true,
-        // focusedRowEnabled: true,
-        // focusedRowKey: 1,
         filterRow: {
             visible: true,
             applyFilter: "auto"
@@ -89,24 +87,14 @@ function fillTableForTasks(tasks) {
                 headerFilter: {
                     allowSearch: false
                 }
-            }, {
-                caption: "Связанные задачи",
-                dataField: "issueLinks",
-                width: 80,
-                headerFilter: {
-                    allowSearch: false
-                }
-            }
             // }, {
-            //     type: "buttons",
-            //     buttons: [{
-            //         text: "Подробнее",
-            //         onClick: function (e) {
-            //             var bookId = e.row.data.id
-            //             window.location.href = '/confluence/library/book-info.action?id=' + bookId;
-            //         }
-            //     }]
-            // }
+            //     caption: "Связанные задачи",
+            //     dataField: "issueLinks",
+            //     width: 80,
+            //     headerFilter: {
+            //         allowSearch: false
+            //     }
+            }
         ]
     }).dxDataGrid('instance');
 
@@ -131,33 +119,4 @@ function fillTableForTasks(tasks) {
             dataGrid.option("filterRow.applyFilter", data.value);
         }
     }).dxSelectBox("instance");
-
-    // $("#notShowAttributes").dxCheckBox({
-    //     text: "Отключить показ атрибутов",
-    //     value: true,
-    //     onValueChanged: function (data) {
-    //                 dataGrid.clearFilter();
-    //                 dataGrid.option("filterRow.visible", data.value);
-    //                 applyFilterModeEditor.option("disabled", !data.value);
-    //             }
-    // })
-
-    // $("#filterRow").dxCheckBox({
-    //     text: "Filter Row",
-    //     value: true,
-    //     onValueChanged: function (data) {
-    //         dataGrid.clearFilter();
-    //         dataGrid.option("filterRow.visible", data.value);
-    //         applyFilterModeEditor.option("disabled", !data.value);
-    //     }
-    // });
-    //
-    // $("#headerFilter").dxCheckBox({
-    //     text: "Header Filter",
-    //     value: true,
-    //     onValueChanged: function (data) {
-    //         dataGrid.clearFilter();
-    //         dataGrid.option("headerFilter.visible", data.value);
-    //     }
-    // });
 }

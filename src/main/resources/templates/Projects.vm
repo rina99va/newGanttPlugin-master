@@ -20,6 +20,7 @@ $webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-ic
 <!-- DevExtreme library -->
 <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/20.2.7/js/dx.all.js"></script>
 
+#if($action.hasAccess())
 <script>
     getAllProjects()
 </script>
@@ -41,3 +42,7 @@ $webResourceManager.requireResource("com.atlassian.auiplugin:aui-experimental-ic
         </div>
 
     </section>
+
+#else
+<p>Авторизуйтесь, чтобы получить доступ к плагину</p>
+#end
